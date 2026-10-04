@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: room-booking-api
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/booking}
+    username: ${DB_USER:booking}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  mvc:
+    problemdetails:
+      enabled: true
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+
+booking:
+  jwt:
+    # HS256 key, at least 32 bytes. Required: the app refuses to start without it.
+    secret: ${JWT_SECRET:}
+    ttl: 1h
+  rules:
+    slot-minutes: 15
+    max-duration: 8h
+    max-days-ahead: 90
+  demo:
+    password: ${DEMO_PASSWORD:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+springdoc:
+  default-produces-media-type: application/json
+  swagger-ui:
+    path: /swagger-ui.html

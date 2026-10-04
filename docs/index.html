@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Room Booking API</title>
+	<meta name="description" content="Spring Boot REST API for booking meeting rooms: JWT auth, PostgreSQL, race-safe overlap checks, 41 tests.">
+	<style>
+		body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #fff; color: #1b2430; }
+		header { background: linear-gradient(135deg, #0f2b1d 0%, #1f5c3a 60%, #2f8a55 100%); color: #fff; padding: 32px 16px; }
+		.wrap { max-width: 1100px; margin: 0 auto; }
+		h1 { margin: 0 0 8px; font-size: 32px; }
+		header p { margin: 0 0 16px; max-width: 760px; line-height: 1.5; opacity: .92; }
+		.facts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+		.facts span { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
+		header a { color: #b9f5cf; font-weight: 600; }
+	</style>
+</head>
+<body>
+	<header>
+		<div class="wrap">
+			<h1>Room Booking API</h1>
+			<p>A Spring Boot service for booking meeting rooms. Two people can never get the same room at the same time:
+				a PostgreSQL exclusion constraint guards every booking, and a test fires 20 simultaneous requests for one slot
+				and checks that exactly one wins.</p>
+			<div class="facts">
+				<span>Java 21 · Spring Boot 4</span><span>PostgreSQL + Flyway</span><span>JWT auth, user/admin roles</span>
+				<span>RFC 9457 error bodies</span><span>41 tests on a real database</span><span>Docker Compose</span>
+			</div>
+			<a href="https://github.com/yasinkilinc/room-booking-api">Source code and README on GitHub</a>
+		</div>
+	</header>
+	<div id="redoc"></div>
+	<script src="https://cdn.jsdelivr.net/npm/redoc@2.5.4/bundles/redoc.standalone.js"></script>
+	<script>
+		Redoc.init("openapi.json", { hideDownloadButton: false, expandResponses: "200,201,409" }, document.getElementById("redoc"));
+	</script>
+</body>
+</html>
